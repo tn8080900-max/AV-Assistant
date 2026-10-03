@@ -1,0 +1,1 @@
+"""Local Windows companion for AV Assistant."""

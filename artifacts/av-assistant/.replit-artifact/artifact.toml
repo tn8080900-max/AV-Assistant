@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "AV Assistant"
+description = "A voice-first personal AI agent with safe computer tools, explicit approvals for consequential actions, session history, and a local Windows companion."
+version = "1.0.0"
+id = "artifacts/av-assistant"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19657
+
+[services.development]
+run = "pnpm --filter @workspace/av-assistant run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/av-assistant", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/av-assistant/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19657"
+BASE_PATH = "/"
